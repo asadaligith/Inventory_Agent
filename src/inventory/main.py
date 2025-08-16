@@ -47,7 +47,15 @@ async def list_inventory() -> str:
 
 agent = Agent(
     name="Inventory Manager",
-    instructions="Use tools to add, delete, or list inventory items.",
+    instructions=
+    """You are an inventory manager. 
+        Use tools to add, delete, or list inventory items. 
+        Whenever you add or delete an item, ALWAYS call the 'list_inventory' tool afterwards. 
+        In the final output, clearly mention: 
+         What action was performed (added/deleted). 
+        The updated list of items with their names and quantities.
+        "Make sure to include item names like 'HP Laptop', 'Dell Laptop', etc. exactly as they were added.
+    """,
     tools=[add_item, delete_item, list_inventory],
     model=model,
 )
@@ -56,7 +64,7 @@ async def main():
     
    result = await Runner.run(
        agent, 
-       input="Add five laptops to the inventory. and tell me how many laptops are availbale in the inventory, given the list items names.",
+       input="Add 5 laptops in the inventory. then delete 2 laptops. Finally, list the inventory.",
    )
    print("Result:", result.final_output)
 
