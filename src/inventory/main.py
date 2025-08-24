@@ -1,11 +1,11 @@
-from agents import Agent, Runner,  function_tool , OpenAIChatCompletionsModel , set_tracing_disabled
+from agents import Agent, Runner,  function_tool , OpenAIChatCompletionsModel , set_tracing_disabled, enable_verbose_stdout_logging
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 import asyncio
 
 load_dotenv()
-
+enable_verbose_stdout_logging()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY environment variable is not set.")
@@ -63,7 +63,7 @@ async def main():
     
    result = await Runner.run(
        agent, 
-       input="Add 5 laptops in the inventory. Finally, list the inventory.",
+       input="Add 5 laptops in the inventory. Finally, show list the inventory.",
    )
    print("Result:", result.final_output)
 
