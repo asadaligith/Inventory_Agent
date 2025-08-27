@@ -15,6 +15,8 @@ dependencies = [
 [project.scripts]
 inventory = "inventory:main"
 main = "inventory.main:start"
+todos = "inventory.todos:start"
+
 
 [build-system]
 requires = ["hatchling"]
